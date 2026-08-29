@@ -1,10 +1,25 @@
 # ga4-analytics-pipeline
-Pipeline de dados ponta a ponta que extrai métricas de aquisição, engajamento e receita do Google Analytics 4 (GA4), orquestra a extração com Apache Airflow, modela os dados em um esquema dimensional no PostgreSQL e apresenta os resultados em um dashboard interativo no Power BI.
 
-O projeto simula um cenário real de analytics de marketing, usando a conta pública de demonstração da Google Merchandise Store como fonte de dados, e reflete um fluxo típico de trabalho de engenharia de dados aplicado a decisões de negócio: da extração via API à visualização final.
+Pipeline de dados end-to-end para coleta, transformação, modelagem e
+visualização de dados do Google Analytics 4 (GA4).
 
-**Stack:** Python · Google Analytics Data API · Apache Airflow · PostgreSQL · SQL · Power BI · Docker
+O projeto coleta métricas de aquisição, engajamento e comportamento dos
+usuários do meu portfólio pessoal, hospedado no GitHub Pages
+(**antoniodcomp.github.io**), por meio da Google Analytics Data API.
+
+A extração dos dados é orquestrada com Apache Airflow, os dados são
+armazenados e transformados em PostgreSQL utilizando um modelo dimensional,
+e os indicadores de negócio são apresentados em um dashboard interativo
+desenvolvido no Power BI.
+
+O projeto simula um fluxo de trabalho de Engenharia de Dados end-to-end,
+abrangendo desde a ingestão de dados de uma API até sua disponibilização
+para análise e tomada de decisão.
+
+**Stack:** Python · Google Analytics Data API · Apache Airflow · PostgreSQL ·
+SQL · Power BI · Docker
 
 ## Arquitetura
 
-`GA4 → Airflow (extração e orquestração) → PostgreSQL (staging + modelo dimensional) → Power BI (dashboard)`
+GA4 → Google Analytics Data API → Airflow → PostgreSQL
+→ Modelo Dimensional → Power BI

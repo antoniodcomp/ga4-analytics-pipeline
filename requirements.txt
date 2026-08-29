@@ -1,0 +1,20 @@
+
+
+# Google Analytics Data API
+google-analytics-data>=0.18.3
+
+# Airflow (Caso vá rodar/testar localmente sem o Docker ou instalar pacotes na imagem)
+apache-airflow>=2.8.0
+apache-airflow-providers-postgres>=5.10.0
+
+# Manipulação de Dados
+pandas>=2.1.0
+pyarrow==21.0.0
+
+# Conexão com PostgreSQL
+psycopg2-binary>=2.9.9
+SQLAlchemy>=2.0.25
+
+# Modelagem (Opcional, mencionado no projeto)
+dbt-core>=1.7.0
+dbt-postgres>=1.7.0
