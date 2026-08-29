@@ -8,9 +8,3 @@ O projeto simula um cenário real de analytics de marketing, usando a conta púb
 ## Arquitetura
 
 `GA4 → Airflow (extração e orquestração) → PostgreSQL (staging + modelo dimensional) → Power BI (dashboard)`
-
-## O que o dashboard responde
-
-- Como o tráfego evolui ao longo do tempo?
-- Qual canal de aquisição gera mais receita?
-- Como a conversão varia por categoria de dispositivo?
