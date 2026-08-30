@@ -1,0 +1,16 @@
+services:
+  airflow:
+    build: .
+
+    ports:
+      - "8080:8080"
+
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./credentials:/opt/airflow/credentials
+      - ./data:/opt/airflow/data
+
+    environment:
+      AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+
+    command: standalone
