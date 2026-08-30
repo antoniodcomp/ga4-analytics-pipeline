@@ -93,3 +93,5 @@ df.to_parquet(output_path, index=False)
 
 print(f"Dados salvos em: {output_path}")
 
+
+#colocar as credenciais do postgress no .env futuramente e adicionar ao gitignore

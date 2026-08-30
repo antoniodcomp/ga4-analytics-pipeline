@@ -9,8 +9,30 @@ services:
       - ./dags:/opt/airflow/dags
       - ./credentials:/opt/airflow/credentials
       - ./data:/opt/airflow/data
+      - ./sql:/opt/airflow/sql
 
     environment:
       AIRFLOW__CORE__LOAD_EXAMPLES: "false"
 
     command: standalone
+
+
+  postgres_dw:
+    image: postgres:15
+    container_name: postgres_dw
+
+    ports:
+      - "5433:5432"
+    
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-admin}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-admin123}
+      POSTGRES_DB: ${POSTGRES_DB:-data_warehouse}
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+    restart: unless-stopped
+
+volumes:
+  postgres_data:

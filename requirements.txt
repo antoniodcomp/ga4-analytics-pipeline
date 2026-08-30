@@ -1,3 +1,4 @@
 google-analytics-data==0.18.3
 pandas==2.1.4
 pyarrow==21.0.0
+psycopg2-binary==2.9.10
