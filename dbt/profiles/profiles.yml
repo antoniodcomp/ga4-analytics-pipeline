@@ -1,0 +1,13 @@
+ga4_analytics:
+  target: dev
+
+  outputs:
+    dev:
+      type: postgres
+      host: postgres_dw
+      port: 5432
+      user: admin
+      password: admin123
+      dbname: data_warehouse
+      schema: analytics
+      threads: 1

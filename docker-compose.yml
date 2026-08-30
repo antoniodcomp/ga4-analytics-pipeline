@@ -10,6 +10,8 @@ services:
       - ./credentials:/opt/airflow/credentials
       - ./data:/opt/airflow/data
       - ./sql:/opt/airflow/sql
+      - ./dbt:/opt/airflow/dbt
+      - ./dbt/profiles:/home/airflow/.dbt
 
     environment:
       AIRFLOW__CORE__LOAD_EXAMPLES: "false"
