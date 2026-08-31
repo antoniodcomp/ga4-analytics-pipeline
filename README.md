@@ -49,37 +49,11 @@ flowchart LR
 ##Fluxo do Pipeline
 
 ### 1. Extração (Python)
-O script [`extract_ga4.py`](dags/scripts/extract_ga4.py) autentica via Service Account e consulta a Google Analytics Data API, extraindo as seguintes métricas dos últimos 7 dias:
-
-| Dimensões | Métricas |
-|-----------|----------|
-| `date` | `activeUsers` |
-| `country` | `sessions` |
-| `sessionDefaultChannelGroup` | `totalUsers` |
-| `deviceCategory` | `conversions` |
-| | `totalRevenue` |
-
-Os dados são salvos em formato **Parquet** na pasta `data/raw/ga4/`.
-
 ### 2. Orquestração (Airflow)
-A DAG [`ga4_pipeline`](dags/ga4_pipeline.py) automatiza a execução do script de extração. O ambiente roda em Docker (Airflow standalone) com o PostgreSQL como Data Warehouse.
-
 ### 3. Armazenamento (PostgreSQL)
-Os dados brutos são carregados na tabela `bronze.ga4_raw`, seguindo o conceito de **Medallion Architecture**.
-
 ### 4. Transformação (dbt)
-O dbt organiza a transformação em duas camadas:
-
-- **Staging** (`stg_ga4`): view que padroniza os dados vindos da camada bronze.
-- **Marts** (modelo dimensional):
-  - `fact_ga4` — tabela fato com métricas agregadas por data, país, canal e dispositivo.
-  - `dim_date`, `dim_country`, `dim_channel`, `dim_device` — tabelas dimensão.
-
 ### 5. Visualização (Power BI)
-Dashboard conectado diretamente ao PostgreSQL, consumindo as tabelas do modelo dimensional para apresentar:
-- Visão geral de tráfego (sessões, usuários, tendência temporal)
-- Comparativo de canais de aquisição
-- Segmentação por dispositivo e país
+
 
 ---
 
@@ -118,18 +92,6 @@ Dashboard conectado diretamente ao PostgreSQL, consumindo as tabelas do modelo d
    ```
 
 7. **Conecte o Power BI** ao PostgreSQL (`localhost:5433`, database `data_warehouse`).
-
----
-
-## Decisões Técnicas
-
-| Decisão | Justificativa |
-|---------|---------------|
-| **GitHub Pages como fonte de dados** | Garante dados reais de tráfego, sem depender de mocks ou datasets estáticos. A conta de demonstração do GA4 não permite acesso via API. |
-| **Parquet como formato intermediário** | Formato colunar eficiente, com tipagem e compressão nativa — ideal para pipelines analíticos. |
-| **Medallion Architecture (Bronze → Staging → Marts)** | Separação clara entre dado bruto, dado padronizado e dado modelado para consumo. |
-| **Modelo dimensional (Star Schema)** | Facilita consultas analíticas e a integração com ferramentas de BI como o Power BI. |
-| **Docker Compose** | Garante que qualquer pessoa consiga rodar o projeto localmente com um único comando. |
 
 ---
 
