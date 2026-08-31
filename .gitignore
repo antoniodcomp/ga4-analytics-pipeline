@@ -32,3 +32,6 @@ Thumbs.db
 
 # Power BI temp files
 *.pbix.temp
+
+
+projeto-ga4-airflow-powerbi
